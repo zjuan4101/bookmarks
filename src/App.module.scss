@@ -1,25 +1,59 @@
+/* App.module.scss */
+
+$color-primary: #B47EB3;
+$color-secondary: #9EE493;
+$color-dark: #363636;
+$color-darker: #242F40;
+$color-accent: #009FB7;
+
+/* Global styles */
 body {
-    margin: 0;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-color: white;
+    font-family: Arial, sans-serif;
+    background-color: $color-dark;
+    color: white;
 }
 
-.banner{
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    img {
-        width: 50%;
-        max-height: 300px;
-    }
-    h1 {
-        width: 100%;
-        text-align: center;
-        color: rgba(23,5, 58, 0.8);
-    }
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
 }
+
+/* Header styles */
+.header {
+    background-color: $color-primary;
+    padding: 20px;
+    color: white;
+}
+
+.logo {
+    font-size: 24px;
+}
+
+/* Button styles */
+.button {
+    background-color: $color-accent;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.button:hover {
+    background-color: darken($color-accent, 10%);
+}
+
+/* Footer styles */
+.footer {
+    background-color: $color-secondary;
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+/* App component specific styles */
+.App {
+    padding: 20px;
+}
+

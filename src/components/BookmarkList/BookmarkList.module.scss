@@ -1,22 +1,40 @@
-.bookmarkList {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    font-size: 2rem;
-    color: rgba(23, 5, 58, 0.8);
-    border-radius: 9px;
-    border: 1px solid rgba(23, 5, 58, 0.1);
-    padding: 2rem;
-    box-shadow: 2px 4px 8px rgba(23, 5, 58, 0.5);
+/* BookmarkList.module.scss */
 
-    .input {
-        color: rgba(89, 15, 230, 0.8);
-        display: inline-block;
-        font-size: 2.5rem;
-        height: 3.5rem;
-        margin: 1rem;
-        border: 0;
-        background-color: aliceblue;
-    }
+.bookmarkList {
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 20px;
 }
+
+.addBookmark {
+    margin-bottom: 20px;
+}
+
+.addBookmark input[type='text'] {
+    margin-right: 10px;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.addBookmark button {
+    padding: 8px 15px;
+    cursor: pointer;
+    background-color: #009FB7;
+    color: white;
+    border: none;
+    border-radius: 5px;
+}
+
+.addBookmark button:hover {
+    background-color: #007A8D;
+}
+
+h3 {
+    margin-bottom: 15px;
+    color: #242F40;
+}
+
+/* Import styles from Bookmark component */
+@import "../Bookmark/Bookmark.module.scss";

@@ -1,10 +1,9 @@
-const mongoose = require('mongoose')
+const {Schema, model} = require('mongoose')
 
-const bookmarkSchema = new mongoose.Schema({
-    title: { type: String, required: true },
-    url: { type: String, required: true }
+const bookmarkSchema = new Schema({
+    title: String,
+    url: String,
+    user: { type: Schema.Types.ObjectId, ref: 'User'}
 })
 
-const Bookmark = mongoose.model('Bookmark', bookmarkSchema)
-
-module.exports = Bookmark
+module.exports = model('Bookmark', bookmarkSchema)

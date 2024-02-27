@@ -1,18 +1,53 @@
+/* Bookmark.module.scss */
+
 .bookmark {
-    font-size: 1.5rem;
-    color: rgba(23, 5, 58, 0.79);
-    
-    .button {
-        background-color: rgba(25, 5, 58, 0.8);
-        text-transform: uppercase;
-        cursor: pointer;
-        color: ghostwhite;
-        padding: 0.25rem 1rem;
-        font-size: 1rem;
-        font-weight: 700;
-        display: inline-block;
-        margin-left: 1rem;
-        border: 2px;
-        box-shadow: 0 2px 5px rgba(23, 5, 58, 0.5);
-    }
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 15px;
+}
+
+.editMode input[type='text'] {
+    margin-bottom: 10px;
+    padding: 5px;
+    width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.actions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+.actions button {
+    padding: 5px 10px;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+}
+
+.actions button:hover {
+    background-color: #009FB7;
+    color: white;
+}
+
+.actions button + button {
+    margin-left: 10px;
+}
+
+h4 {
+    font-size: 18px;
+    margin-bottom: 5px;
+    color: #242F40;
+}
+
+a {
+    text-decoration: none;
+    color: #009FB7;
+}
+
+a:hover {
+    text-decoration: underline;
 }

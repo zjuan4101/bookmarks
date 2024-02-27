@@ -1,0 +1,22 @@
+/* AuthPage.module.scss */
+
+.authPage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.toggleButton {
+    padding: 10px 20px;
+    margin-bottom: 20px;
+    background-color: #363636;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.toggleButton:hover {
+    background-color: #242F40;
+}

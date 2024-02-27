@@ -1,0 +1,35 @@
+/* SignUpForm.module.scss */
+
+.heading {
+    font-size: 24px;
+    color: #242F40;
+    margin-bottom: 20px;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+.form input[type='text'],
+.form input[type='email'],
+.form input[type='password'] {
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.form input[type='submit'] {
+    padding: 8px 15px;
+    cursor: pointer;
+    background-color: #009FB7;
+    color: white;
+    border: none;
+    border-radius: 5px;
+}
+
+.form input[type='submit']:hover {
+    background-color: #007A8D;
+}

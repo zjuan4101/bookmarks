@@ -7,6 +7,7 @@ const userSchema = new mongoose.Schema({
   name: String,
   email: String,
   password: String,
+  bookmarks: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Bookmark'}]
 })
 
 userSchema.pre('save', async function(next) {
