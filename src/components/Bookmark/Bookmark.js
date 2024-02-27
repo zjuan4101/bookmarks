@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import styles from './Bookmark.module.scss';
 
-export default function Bookmark ({ bookmark, deleteBookmark, updateBookmark }) {
-    const [editMode, setEditMode] = useState(false)
-    const [editedBookmark, setEditedBookmark] = useState({ title: bookmark.title, url: bookmark.url })
+export default function Bookmark({ bookmark, deleteBookmark, updateBookmark }) {
+    const [editMode, setEditMode] = useState(false);
+    const [editedBookmark, setEditedBookmark] = useState({ title: bookmark.title, url: bookmark.url });
 
     const handleUpdate = async () => {
-        await updateBookmark(bookmark._id, editedBookmark)
-        setEditMode(false)
-    }
+        await updateBookmark(bookmark._id, editedBookmark);
+        setEditMode(false);
+    };
 
     return (
         <div className={styles.bookmark}>
@@ -38,5 +38,5 @@ export default function Bookmark ({ bookmark, deleteBookmark, updateBookmark }) 
                 </>
             )}
         </div>
-    )
+    );
 }

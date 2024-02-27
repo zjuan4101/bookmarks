@@ -30,6 +30,32 @@ function App() {
     title: '',
     url: ''
   });
+  const updateBookmark = async (updatedBookmarkData, id) => {
+    try {
+      const response = await fetch("/api/bookmarks/".concat(id), {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(updatedBookmarkData)
+      });
+
+      // Parse the response here
+      const updatedBookmark = await response.json();
+
+      // Update the state with the updated bookmark
+      const updatedBookmarks = bookmarks.map(bookmark => {
+        if (bookmark._id === id) {
+          return updatedBookmark;
+        } else {
+          return bookmark;
+        }
+      });
+      setBookmarks(updatedBookmarks);
+    } catch (error) {
+      console.error(error);
+    }
+  };
   const createBookmark = async () => {
     const body = _objectSpread({}, newBookmark);
     try {
@@ -53,51 +79,36 @@ function App() {
   };
   const deleteBookmark = async id => {
     try {
-      await fetch("/api/bookmarks/".concat(id), {
+      const index = bookmarks.findIndex(bookmark => bookmark._id === id);
+      const bookmarksCopy = [...bookmarks];
+      const response = await fetch("/api/bookmarks/".concat(id), {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json'
         }
       });
-      const updatedBookmarks = bookmarks.filter(bookmark => bookmark._id !== id);
-      setBookmarks(updatedBookmarks);
+      await response.json();
+      bookmarksCopy.splice(index, 1);
+      setBookmarks(bookmarksCopy);
     } catch (error) {
       console.error(error);
     }
   };
-  const updateBookmark = async (id, updatedBookmark) => {
-    try {
-      const response = await fetch("/api/bookmarks/".concat(id), {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(updatedBookmark)
-      });
-      const updatedData = await response.json();
-      setBookmarks(bookmarks.map(bookmark => bookmark._id === id ? updatedData : bookmark));
-    } catch (error) {
-      console.error(error);
-    }
-  };
-  const getBookmarks = async () => {
+  const fetchBookmarks = async () => {
     try {
       const response = await fetch('/api/bookmarks');
-      const foundBookmarks = await response.json();
-      setBookmarks(foundBookmarks.reverse());
-      const responseTwo = await fetch('/api/bookmarks/completed');
-      const foundCompletedBookmarks = await responseTwo.json();
-      setCompletedBookmarks(foundCompletedBookmarks.reverse());
+      const data = await response.json();
+      setBookmarks(data);
     } catch (error) {
       console.error(error);
     }
   };
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
-    getBookmarks();
+    fetchBookmarks();
   }, []);
   return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
     className: _App_module_scss__WEBPACK_IMPORTED_MODULE_2__["default"].banner
-  }, /*#__PURE__*/React.createElement("h1", null, "Bookmark Manager")), /*#__PURE__*/React.createElement(_components_BookmarkList_BookmarkList__WEBPACK_IMPORTED_MODULE_1__["default"], {
+  }, /*#__PURE__*/React.createElement("h1", null, "The World Famous Big Poppa Code React Starter Kit")), /*#__PURE__*/React.createElement(_components_BookmarkList_BookmarkList__WEBPACK_IMPORTED_MODULE_1__["default"], {
     newBookmark: newBookmark,
     setNewBookmark: setNewBookmark,
     createBookmark: createBookmark,
@@ -187,8 +198,9 @@ function Bookmark(_ref) {
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _BookmarkList_module_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./BookmarkList.module.scss */ "./src/components/BookmarkList/BookmarkList.module.scss");
-/* harmony import */ var _Bookmark_Bookmark__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../Bookmark/Bookmark */ "./src/components/Bookmark/Bookmark.js");
+/* harmony import */ var _Bookmark_Bookmark__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../Bookmark/Bookmark */ "./src/components/Bookmark/Bookmark.js");
+/* harmony import */ var _BookmarkList_module_scss__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./BookmarkList.module.scss */ "./src/components/BookmarkList/BookmarkList.module.scss");
+/* provided dependency */ var React = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
 function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
 function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -206,20 +218,20 @@ function BookmarkList(_ref) {
     deleteBookmark,
     updateBookmark
   } = _ref;
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: _BookmarkList_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].bookmarkList
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: _BookmarkList_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].addBookmark
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
-    className: _BookmarkList_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].input,
+  return /*#__PURE__*/React.createElement("div", {
+    className: _BookmarkList_module_scss__WEBPACK_IMPORTED_MODULE_2__["default"].bookmarkList
+  }, /*#__PURE__*/React.createElement("div", {
+    className: _BookmarkList_module_scss__WEBPACK_IMPORTED_MODULE_2__["default"].addBookmark
+  }, /*#__PURE__*/React.createElement("input", {
+    className: _BookmarkList_module_scss__WEBPACK_IMPORTED_MODULE_2__["default"].input,
     type: "text",
     placeholder: "Add New Bookmark URL",
     value: newBookmark.url,
     onChange: e => setNewBookmark(_objectSpread(_objectSpread({}, newBookmark), {}, {
       url: e.target.value
     }))
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
-    className: _BookmarkList_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].input,
+  }), /*#__PURE__*/React.createElement("input", {
+    className: _BookmarkList_module_scss__WEBPACK_IMPORTED_MODULE_2__["default"].input,
     type: "text",
     placeholder: "Add New Bookmark Title",
     value: newBookmark.title,
@@ -227,9 +239,9 @@ function BookmarkList(_ref) {
       title: e.target.value
     })),
     onKeyDown: e => e.key === 'Enter' && createBookmark()
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+  }), /*#__PURE__*/React.createElement("button", {
     onClick: createBookmark
-  }, "Add Bookmark")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h3", null, "Bookmarks"), bookmarks.map(bookmark => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_Bookmark_Bookmark__WEBPACK_IMPORTED_MODULE_2__["default"], {
+  }, "Add Bookmark")), /*#__PURE__*/React.createElement("h3", null, "Bookmarks"), bookmarks.map(bookmark => /*#__PURE__*/React.createElement(_Bookmark_Bookmark__WEBPACK_IMPORTED_MODULE_1__["default"], {
     key: bookmark._id,
     bookmark: bookmark,
     deleteBookmark: deleteBookmark,
@@ -248,13 +260,15 @@ function BookmarkList(_ref) {
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_dom_client__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom/client */ "./node_modules/react-dom/client.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/dist/index.js");
 /* harmony import */ var _App__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./App */ "./src/App.js");
 /* provided dependency */ var React = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 
 
 
+
 const root = (0,react_dom_client__WEBPACK_IMPORTED_MODULE_1__.createRoot)(document.getElementById("app"));
-root.render( /*#__PURE__*/React.createElement(react__WEBPACK_IMPORTED_MODULE_0__.StrictMode, null, /*#__PURE__*/React.createElement(_App__WEBPACK_IMPORTED_MODULE_2__["default"], null)));
+root.render( /*#__PURE__*/React.createElement(react__WEBPACK_IMPORTED_MODULE_0__.StrictMode, null, /*#__PURE__*/React.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.BrowserRouter, null, /*#__PURE__*/React.createElement(_App__WEBPACK_IMPORTED_MODULE_2__["default"], null))));
 
 /***/ }),
 
@@ -640,6 +654,36 @@ var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js
 /******/ 		};
 /******/ 	})();
 /******/ 	
+/******/ 	/* webpack/runtime/create fake namespace object */
+/******/ 	(() => {
+/******/ 		var getProto = Object.getPrototypeOf ? (obj) => (Object.getPrototypeOf(obj)) : (obj) => (obj.__proto__);
+/******/ 		var leafPrototypes;
+/******/ 		// create a fake namespace object
+/******/ 		// mode & 1: value is a module id, require it
+/******/ 		// mode & 2: merge all properties of value into the ns
+/******/ 		// mode & 4: return value when already ns object
+/******/ 		// mode & 16: return value when it's Promise-like
+/******/ 		// mode & 8|1: behave like require
+/******/ 		__webpack_require__.t = function(value, mode) {
+/******/ 			if(mode & 1) value = this(value);
+/******/ 			if(mode & 8) return value;
+/******/ 			if(typeof value === 'object' && value) {
+/******/ 				if((mode & 4) && value.__esModule) return value;
+/******/ 				if((mode & 16) && typeof value.then === 'function') return value;
+/******/ 			}
+/******/ 			var ns = Object.create(null);
+/******/ 			__webpack_require__.r(ns);
+/******/ 			var def = {};
+/******/ 			leafPrototypes = leafPrototypes || [null, getProto({}), getProto([]), getProto(getProto)];
+/******/ 			for(var current = mode & 2 && value; typeof current == 'object' && !~leafPrototypes.indexOf(current); current = getProto(current)) {
+/******/ 				Object.getOwnPropertyNames(current).forEach((key) => (def[key] = () => (value[key])));
+/******/ 			}
+/******/ 			def['default'] = () => (value);
+/******/ 			__webpack_require__.d(ns, def);
+/******/ 			return ns;
+/******/ 		};
+/******/ 	})();
+/******/ 	
 /******/ 	/* webpack/runtime/define property getters */
 /******/ 	(() => {
 /******/ 		// define getter functions for harmony exports
@@ -655,6 +699,17 @@ var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js
 /******/ 	/* webpack/runtime/hasOwnProperty shorthand */
 /******/ 	(() => {
 /******/ 		__webpack_require__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/make namespace object */
+/******/ 	(() => {
+/******/ 		// define __esModule on exports
+/******/ 		__webpack_require__.r = (exports) => {
+/******/ 			if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
+/******/ 				Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+/******/ 			}
+/******/ 			Object.defineProperty(exports, '__esModule', { value: true });
+/******/ 		};
 /******/ 	})();
 /******/ 	
 /******/ 	/* webpack/runtime/node module decorator */
@@ -729,7 +784,7 @@ var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js
 /******/ 	// startup
 /******/ 	// Load entry module and return exports
 /******/ 	// This entry module depends on other loaded chunks and execution need to be delayed
-/******/ 	var __webpack_exports__ = __webpack_require__.O(undefined, ["vendors-node_modules_css-loader_dist_runtime_api_js-node_modules_css-loader_dist_runtime_sour-b53f7e"], () => (__webpack_require__("./src/index.js")))
+/******/ 	var __webpack_exports__ = __webpack_require__.O(undefined, ["vendors-node_modules_css-loader_dist_runtime_api_js-node_modules_css-loader_dist_runtime_sour-354ecd"], () => (__webpack_require__("./src/index.js")))
 /******/ 	__webpack_exports__ = __webpack_require__.O(__webpack_exports__);
 /******/ 	
 /******/ })()
