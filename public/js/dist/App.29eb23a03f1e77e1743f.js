@@ -895,9 +895,32 @@ ___CSS_LOADER_EXPORT___.locals = {
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default()((_node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0___default()));
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ``, "",{"version":3,"sources":[],"names":[],"mappings":"","sourceRoot":""}]);
+___CSS_LOADER_EXPORT___.push([module.id, `/* AuthPage.module.scss */
+.WI29TvQcwd9BG8AGtQm4 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.zEwr5fI7QznWtDPzoKQB {
+  padding: 10px 20px;
+  margin-bottom: 20px;
+  background-color: #363636;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.zEwr5fI7QznWtDPzoKQB:hover {
+  background-color: #242F40;
+}`, "",{"version":3,"sources":["webpack://./src/pages/AuthPage/AuthPage.module.scss"],"names":[],"mappings":"AAAA,yBAAA;AAEA;EACI,aAAA;EACA,sBAAA;EACA,mBAAA;AAAJ;;AAGA;EACI,kBAAA;EACA,mBAAA;EACA,yBAAA;EACA,YAAA;EACA,YAAA;EACA,kBAAA;EACA,eAAA;EACA,eAAA;AAAJ;;AAGA;EACI,yBAAA;AAAJ","sourcesContent":["/* AuthPage.module.scss */\n\n.authPage {\n    display: flex;\n    flex-direction: column;\n    align-items: center;\n}\n\n.toggleButton {\n    padding: 10px 20px;\n    margin-bottom: 20px;\n    background-color: #363636;\n    color: white;\n    border: none;\n    border-radius: 5px;\n    cursor: pointer;\n    font-size: 16px;\n}\n\n.toggleButton:hover {\n    background-color: #242F40;\n}\n"],"sourceRoot":""}]);
 // Exports
-___CSS_LOADER_EXPORT___.locals = {};
+___CSS_LOADER_EXPORT___.locals = {
+	"authPage": `WI29TvQcwd9BG8AGtQm4`,
+	"toggleButton": `zEwr5fI7QznWtDPzoKQB`
+};
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
 
